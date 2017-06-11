@@ -1,34 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Sentiment Node Site</title>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sentiment Node Site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <script src="js/main.js"></script> -->
+    <link rel="stylesheet" href="/css/styles.css">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-  <header>
+  </head>
+  <body>
     <nav class="navbar navbar-inverse">
-      <a href="/" class="navbar-brand">Sentiment</a>
+      <div class="navbar-brand">Sentiment</div>
       <ul class="nav navbar-nav">
         <li><a href="/">Home</a></li>
       </ul>
     </nav>
-  </header>
 
-  <!-- MAIN CONTENT HERE -->
-    <%- defineContent('hero') %>
+    <!-- MAIN CONTENT HERE -->
+      <%- defineContent('hero') %>
 
-  <main>
-    <div class="container">
-      <%- body %>
-    </div>
-  </main>
+    <main>
+      <div class="container">
+        <%- body %>
+      </div>
+    </main>
 
-  <footer>
-    Sentiment Site. Copyright &copy; 2017
-
-  </footer>
-</body>
+    <footer>
+      Sentiment Site. Copyright &copy; 2017
+    </footer>
+  </body>
+  <!-- <script src="/js/key.js"></script> -->
 </html>

@@ -1,3 +1,24 @@
 <%- contentFor('body') %>
+<script>
 
-<h1>Hello</h1>
+</script>
+<header>
+  <h1>Share Your Thoughts!</h1>
+</header>
+
+  <form id="frm1" class="submit" action="/" method="post">
+   <input type="text" required name="userInput" placeholder="Set your thoughts here" >
+   <button type="submit">Mood</button>
+  </form>
+
+  <div class="wrapper">
+   <div class="content">
+    <p><strong>Response appears here!!! </strong></p>
+
+          <% if (typeof data != 'undefined') { %>
+               <h2>I have a data!</h2>
+                  <%- JSON.stringify(data) %>
+                  <%= data %>
+          <% } %>
+
+  </div>

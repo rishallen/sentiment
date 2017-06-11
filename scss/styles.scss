@@ -1,7 +1,8 @@
-// styles.scss
-.testing {
-  width: percentage(5/7);
-}
-body {
-  background-color: red;
-}
+// Globals
+@import "partials/__globals";             // Globals styling.
+
+// Mixins
+@import "partials/__reset.scss";          // Boilerplate globals
+
+// Individual Pages
+@import "partials/__form-layout";         // Form styling.

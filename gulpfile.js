@@ -61,7 +61,7 @@ gulp.task('clean:dist', function() {
 })
 
 gulp.task('build', function (callback) {
-  runSequence(['sass', 'useref', 'images', 'fonts'],
+  runSequence(['sass', 'useref', 'img'],
     callback
   )
 })
