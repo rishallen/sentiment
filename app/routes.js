@@ -5,7 +5,7 @@ var es6        = require('es6-promise').polyfill();
 var isomorphic = require('isomorphic-fetch');
 
 // create our router object
-var router     = express.Router();
+var router     = express.Router(); //server side, incoming requests
 
 // export our router
 module.exports = router;
@@ -18,11 +18,6 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
   console.log("The form submitted, yay!!", req.body.userInput);
-  // var someText = "this is a test-- POSTED"
-  // TODO: find the form data on the request object -- done
-  // Objective one: console log the user input text
-
-  // Objective two: set up a post (not ajax, there will be some other standard javascript request library)
 
   fetch("https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2017-02-27", {
     method: "post",
@@ -42,26 +37,76 @@ router.post('/', function(req, res) {
         "keywords": {
           "emotion": true,
           "sentiment": true,
-          "limit": 1
+          "limit": 10
         }
       }
     })
   })
   .then(function(response) { //callback
-    // console.log('Response success: ', response.text());
     return response.json(); // json is a promise
   })
   .then(function(bodyJson) { // this is the promise result
-    // console.log('response json', bodyJson); //this prints the response to the terminal, not the actual app
-    //step 3. This is where I make the edited response
+    console.log('response json', bodyJson); //this prints the response to the terminal, not the actual app  (server side)
 
-    // console.log(text);
+    const keywordObjects = bodyJson.keywords
+    let emotionsArray = [];
+    for(var i=0; i < keywordObjects.length; i++) {
+      emotionsArray.push(keywordObjects[i].emotion);
+    };
+
+    var makeSumDict = function(arr) {
+      let totalEmotionsDict = {};
+      for (let i = 0; i < arr.length; i++) {
+        let obj = arr[i];
+        for (let key in obj) {
+          if(key in totalEmotionsDict) {
+            totalEmotionsDict[key] += obj[key];
+          } else {
+            totalEmotionsDict[key] = obj[key];
+          }
+        }
+      }
+      return totalEmotionsDict;
+    };
+
+    const getHighestEmotion = function(emotionsTotals) {
+      let highestSum;
+      let highestSumKey;
+      for(let key in emotionsTotals) {
+        if (highestSum === undefined) {
+          highestSum = emotionsTotals[key];
+          highestSumKey = key;
+        } else {
+          if (highestSum < emotionsTotals[key]) {
+             highestSum = emotionsTotals[key];
+             highestSumKey = key;
+          }
+        }
+      }
+      return highestSumKey;
+    };
+
+    const getAffirmationForEmotion = function(highestEmotion) {
+      const affirmationDict = {
+        "sadness": ["Love", "Exceptance", "Let it Go", "Tolerance", "Peace"],
+        "joy":     ["Sun", "keep going", "Your on track", "vortex", "love is yours"],
+        "fear":    ["do it anyway", "illusions", "scarey", "me too", "stop it"],
+        "disgust": ["shower", "stop judging", "meditate", "wow", "judgemental are you?"],
+        "anger":   ["simmer down", "punch something", "hot head", "yoga", "scream"]
+      };
+
+      const affirmationArray = affirmationDict[highestEmotion];
+      // min 0 max length-1
+      return affirmationArray[Math.floor(Math.random() * affirmationArray.length)];
+    };
 
 
-    // before you render a response
-    // process the data and decide what helpful text to send the userInput
-    // then let that helpful text be sent in the render method below
-    res.render('pages/home', {data: bodyJson});
+    const emotionsTotals = makeSumDict(emotionsArray);
+    const highestEmotion = getHighestEmotion(emotionsTotals);
+    const affirmation    = getAffirmationForEmotion(highestEmotion);
+
+
+    res.render('pages/home', {affirmation: affirmation}); //the html is being rendered to the browser
   })
   .catch(function(error) {
     console.log('Request failure: ', error)

@@ -1,5 +1,5 @@
 /*
-    General Styles
+General Styles
 */
 *,
 *:before,
@@ -12,59 +12,53 @@ html {
   text-align: center;
 }
 body {
-  // background-color: red;
+  background: #fff;
 }
 /*
   Navigation
 */
-.navbar-inverse {
-  height: 40px;
-  position: relative;
-  top:0;
+.nav {
+  float: left;
+  position: absolute;
+  top: 49px;
+  left: 47px;
 }
-
+li a {
+  font-family: 'Baloo Bhaina', cursive;
+  font-size: 35px;
+  text-decoration: none;
+}
 /*
 Header Styles
 */
-header {
-    // margin: 0 0 2em;
-    color: #196E76;
+header h1 {
+  font-family: 'Pacifico', serif;
+  font-size: 3em;
+  text-shadow: 0 4px 2px rgba(0, 0, 0, .1);
+  margin: 35px 0px;
+  color: #196E76;
 }
 
-    header h1 {
-        font-family: 'Pacifico', serif;
-        font-size: 3em;
-        text-shadow: 0 4px 2px rgba(0, 0, 0, .1);
-        margin: 47px 0px;
-    }
+/*
+Box Styles
+*/
+.box {
+  width: 77%;
+  height: 550px;
+  background: #10182e;
+  // opacity: .4;
+  margin: 122px auto;
+}
+.shadow {
+  box-shadow: 0 10px 6px -6px #777;
+}
+/*
+Footer Styles
+*/
+footer {
+  margin-bottom: 3em;
+}
 
-        header h1 a {
-            text-decoration: none;
-        }
-
-    header p {
-        margin-top: -.625em;
-        text-indent: 7.75em; /* indent slightly */
-        text-shadow: 0 1px 0px rgba(0, 0, 0, .15);
-        font-size: .875em; /* 14/16 */
-    }
-
-    @media screen and (max-width: 600px) {
-        header p {
-            text-indent: 0;
-            margin-top: .5em;
-        }
-    }
-
-    /*
-        Footer
-        Styles for the attribution footer
-    */
-    footer {
-        margin-bottom: 3em;
-    }
-
-        footer p {
-            font-size: .875em; /* 14/16 */
-            color: #9B9B9B;
-        }
+footer p {
+  font-size: 14px;
+}

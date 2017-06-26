@@ -1,24 +1,21 @@
 <%- contentFor('body') %>
-<script>
-
-</script>
-<header>
-  <h1>Share Your Thoughts!</h1>
-</header>
+<div class="box shadow">
+  <header>
+    <h1>Share Your Thoughts!</h1>
+  </header>
 
   <form id="frm1" class="submit" action="/" method="post">
-   <input type="text" required name="userInput" placeholder="Set your thoughts here" >
+   <input type="text" required name="userInput">
    <button type="submit">Mood</button>
   </form>
 
   <div class="wrapper">
    <div class="content">
     <p><strong>Response appears here!!! </strong></p>
+      <% if (typeof affirmation != 'undefined') { %>
+        <h2>I have a data!</h2>
 
-          <% if (typeof data != 'undefined') { %>
-               <h2>I have a data!</h2>
-                  <%- JSON.stringify(data) %>
-                  <%= data %>
-          <% } %>
-
+          <%- JSON.stringify(affirmation) %>
+      <% } %>
   </div>
+</div>
